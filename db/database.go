@@ -7,9 +7,16 @@ type Entity interface {
 type Persistence interface {
 	Save(e Entity) (string, error)
 	GetEntities() ([]Entity, error)
+	GetEntity(id string) (*Entity, error)
 
-	GetStrategy() string
+	GetStrategy() DatabaseStrategy
 }
+
+type DatabaseStrategy string
+
+const (
+	InMemory DatabaseStrategy = "in_memory"
+)
 
 type Database struct {
 	adapter Persistence
@@ -27,6 +34,10 @@ func (d Database) GetEntities() ([]Entity, error) {
 	return d.adapter.GetEntities()
 }
 
-func (d Database) GetStrategy() string {
+func (d Database) GetEntity(id string) (*Entity, error) {
+	return d.adapter.GetEntity(id)
+}
+
+func (d Database) GetStrategy() DatabaseStrategy {
 	return d.adapter.GetStrategy()
 }

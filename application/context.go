@@ -8,7 +8,7 @@ import (
 type AppContext struct {
 	Db         db.Database
 	Version    string
-	DbStrategy string
+	DbStrategy db.DatabaseStrategy
 }
 
 func NewApplication() AppContext {

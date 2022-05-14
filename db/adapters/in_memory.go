@@ -35,6 +35,14 @@ func (im InMemory) GetEntities() ([]db.Entity, error) {
 	return results, nil
 }
 
-func (db InMemory) GetStrategy() string {
-	return "in_memory"
+func (im InMemory) GetEntity(id string) (*db.Entity, error) {
+	var result db.Entity
+
+	result = im.data[id]
+
+	return &result, nil
+}
+
+func (im InMemory) GetStrategy() db.DatabaseStrategy {
+	return db.InMemory
 }

@@ -38,6 +38,20 @@ func (r PersonRepository) GetPeople() ([]entities.Person, error) {
 	return from_entities(results), nil
 }
 
+func (r PersonRepository) GetPerson(id string) (*entities.Person, error) {
+	result, err := r.db.GetEntity(id)
+	if err != nil {
+		return nil, err
+	}
+
+	if result == nil {
+		return nil, nil
+	}
+
+	person := from_entity(*result)
+	return &person, nil
+}
+
 func from_entities(peopleEntities []db.Entity) []entities.Person {
 	var people []entities.Person
 	for _, p := range peopleEntities {
