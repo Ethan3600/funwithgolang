@@ -1,12 +1,14 @@
 package http
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
 	"echoapp/application"
+	cpu_controller "echoapp/controllers/cpu"
 	person_controller "echoapp/controllers/person"
 	"echoapp/dtos"
 )
@@ -44,6 +46,32 @@ func registerV1Api(v1Api *echo.Group, app application.AppContext) {
 	})
 
 	people := v1Api.Group("/people")
+	registerPeopleApi(*people, app)
+
+	v1Api.GET("/cpu", func(c echo.Context) error {
+		times := int(1)
+
+		err := echo.QueryParamsBinder(c).
+			Int("times", &times).
+			BindError()
+
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, dtos.R{
+				"status":  dtos.Error,
+				"message": "Invalid times Url",
+			})
+		}
+
+		nums := cpu_controller.GetCpuIntensiveWork(times)
+		return c.JSON(http.StatusOK, dtos.R{
+			"status": dtos.Success,
+			"data":   nums,
+		})
+
+	})
+}
+
+func registerPeopleApi(people echo.Group, app application.AppContext) {
 	people.POST("", func(c echo.Context) error {
 		var person dtos.Person
 
@@ -99,7 +127,7 @@ func registerV1Api(v1Api *echo.Group, app application.AppContext) {
 		if person == nil {
 			return c.JSON(http.StatusNotFound, dtos.R{
 				"status":  dtos.Fail,
-				"message": "Internal failure",
+				"message": fmt.Sprintf("Person with ID: %s not found", id),
 			})
 		}
 

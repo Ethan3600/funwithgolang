@@ -44,12 +44,12 @@ func (r PersonRepository) GetPerson(id string) (*entities.Person, error) {
 		return nil, err
 	}
 
-	if result == nil {
+	if *result != nil {
+		person := from_entity(*result)
+		return &person, nil
+	} else {
 		return nil, nil
 	}
-
-	person := from_entity(*result)
-	return &person, nil
 }
 
 func from_entities(peopleEntities []db.Entity) []entities.Person {
