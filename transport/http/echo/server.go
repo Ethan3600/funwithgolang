@@ -67,7 +67,6 @@ func registerV1Api(v1Api *echo.Group, app application.AppContext) {
 			"status": dtos.Success,
 			"data":   nums,
 		})
-
 	})
 }
 

@@ -1,16 +1,26 @@
 package service
 
-import "math"
+import (
+	"math"
+	"sync"
+)
 
 // CPU does stuff
 func CPU(times int) []int {
 	// Keeps it to a 32 bit int
 	num := 40
 	var r []int
+	var wg sync.WaitGroup
+	wg.Add(times)
 	for i := 0; i < times; i++ {
-		d := bubble(expand(reversePrime(fib(num))))
-		r = append(r, d[len(d)-1])
+		go func() {
+			d := bubble(expand(reversePrime(fib(num))))
+			r = append(r, d[len(d)-1])
+			wg.Done()
+		}()
 	}
+
+	wg.Wait()
 	return r
 }
 
