@@ -1,7 +1,7 @@
 package dtos
 
 import (
-	"echoapp/entities"
+	"github.com/Ethan3600/funwithgolang/entities"
 )
 
 type Person struct {

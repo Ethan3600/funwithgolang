@@ -1,10 +1,10 @@
 package person
 
 import (
-	"echoapp/application"
-	"echoapp/dtos"
-	"echoapp/entities"
-	"echoapp/repositories"
+	"github.com/Ethan3600/funwithgolang/application"
+	"github.com/Ethan3600/funwithgolang/dtos"
+	"github.com/Ethan3600/funwithgolang/entities"
+	"github.com/Ethan3600/funwithgolang/repositories"
 )
 
 func CreatePerson(p dtos.Person, app application.AppContext) (string, error) {

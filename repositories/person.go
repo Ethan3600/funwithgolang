@@ -1,9 +1,10 @@
 package repositories
 
 import (
-	"echoapp/db"
-	"echoapp/entities"
 	"sync"
+
+	"github.com/Ethan3600/funwithgolang/db"
+	"github.com/Ethan3600/funwithgolang/entities"
 )
 
 var once sync.Once

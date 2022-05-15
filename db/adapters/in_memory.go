@@ -1,7 +1,7 @@
 package adapters
 
 import (
-	"echoapp/db"
+	"github.com/Ethan3600/funwithgolang/db"
 )
 
 type InMemory struct {
