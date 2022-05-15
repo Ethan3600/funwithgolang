@@ -1,8 +1,8 @@
 package main
 
 import (
-	"echoapp/application"
-	http "echoapp/transport/http/echo"
+	"github.com/Ethan3600/funwithgolang/application"
+	http "github.com/Ethan3600/funwithgolang/transport/http/echo"
 )
 
 func main() {

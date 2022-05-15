@@ -1,4 +1,4 @@
-module echoapp
+module github.com/Ethan3600/funwithgolang
 
 go 1.18
 

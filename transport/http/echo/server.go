@@ -7,10 +7,10 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"echoapp/application"
-	cpu_controller "echoapp/controllers/cpu"
-	person_controller "echoapp/controllers/person"
-	"echoapp/dtos"
+	"github.com/Ethan3600/funwithgolang/application"
+	cpu_controller "github.com/Ethan3600/funwithgolang/controllers/cpu"
+	person_controller "github.com/Ethan3600/funwithgolang/controllers/person"
+	"github.com/Ethan3600/funwithgolang/dtos"
 )
 
 func NewServer(app application.AppContext) {

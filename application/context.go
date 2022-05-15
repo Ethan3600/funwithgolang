@@ -1,8 +1,8 @@
 package application
 
 import (
-	"echoapp/db"
-	"echoapp/db/adapters"
+	"github.com/Ethan3600/funwithgolang/db"
+	"github.com/Ethan3600/funwithgolang/db/adapters"
 )
 
 type AppContext struct {
