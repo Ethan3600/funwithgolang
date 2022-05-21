@@ -3,9 +3,14 @@ module github.com/Ethan3600/funwithgolang
 go 1.18
 
 require (
+	github.com/google/uuid v1.3.0
+	github.com/labstack/echo/v4 v4.7.2
+)
+
+require (
+	github.com/go-chi/chi/v5 v5.0.7 // indirect
+	github.com/go-chi/render v1.0.1 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
-	github.com/google/uuid v1.3.0 // indirect
-	github.com/labstack/echo/v4 v4.7.2 // indirect
 	github.com/labstack/gommon v0.3.1 // indirect
 	github.com/mattn/go-colorable v0.1.11 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
