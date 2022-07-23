@@ -10,6 +10,7 @@ import (
 	"github.com/Ethan3600/funwithgolang/application"
 	cpu_controller "github.com/Ethan3600/funwithgolang/controllers/cpu"
 	person_controller "github.com/Ethan3600/funwithgolang/controllers/person"
+	"github.com/Ethan3600/funwithgolang/db"
 	"github.com/Ethan3600/funwithgolang/dtos"
 )
 
@@ -41,7 +42,7 @@ func registerV1Api(v1Api *echo.Group, app application.AppContext) {
 		return c.JSON(http.StatusOK, dtos.R{
 			"status":        dtos.Success,
 			"version":       app.Version,
-			"database_type": app.Db.GetStrategy(),
+			"database_type": app.Get("database").(db.Database).GetStrategy(),
 		})
 	})
 

@@ -36,9 +36,7 @@ func (im InMemory) GetEntities() ([]db.Entity, error) {
 }
 
 func (im InMemory) GetEntity(id string) (*db.Entity, error) {
-	var result db.Entity
-
-	result = im.data[id]
+	var result  = im.data[id]
 
 	return &result, nil
 }

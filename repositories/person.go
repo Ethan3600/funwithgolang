@@ -9,21 +9,17 @@ import (
 
 var once sync.Once
 
-var singleton *PersonRepository
-
 type PersonRepository struct {
 	db db.Database
 }
 
 func NewPersonRepository(db db.Database) PersonRepository {
 
-	once.Do(func() {
-		singleton = &PersonRepository{
-			db,
-		}
-	})
+    repo := PersonRepository{
+        db,
+    }
 
-	return *singleton
+	return repo
 }
 
 func (r PersonRepository) Save(p entities.Person) (string, error) {

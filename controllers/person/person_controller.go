@@ -10,13 +10,13 @@ import (
 func CreatePerson(p dtos.Person, app application.AppContext) (string, error) {
 	personEntity := p.ToEntity()
 
-	repo := repositories.NewPersonRepository(app.Db)
+	var repo  = app.Get("personRepository").(repositories.PersonRepository)
 
 	return repo.Save(personEntity)
 }
 
 func GetPeople(app application.AppContext) ([]dtos.Person, error) {
-	repo := repositories.NewPersonRepository(app.Db)
+	var repo  = app.Get("personRepository").(repositories.PersonRepository)
 
 	peopleEntities, err := repo.GetPeople()
 	if err != nil {
@@ -27,7 +27,8 @@ func GetPeople(app application.AppContext) ([]dtos.Person, error) {
 }
 
 func GetPerson(id string, app application.AppContext) (*dtos.Person, error) {
-	repo := repositories.NewPersonRepository(app.Db)
+	var repo  = app.Get("personRepository").(repositories.PersonRepository)
+
 	var person *dtos.Person
 
 	personEntity, err := repo.GetPerson(id)
