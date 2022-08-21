@@ -97,7 +97,7 @@ func registerPeopleApi(people echo.Group, app application.AppContext) {
 	})
 
 	people.GET("", func(c echo.Context) error {
-		people, err := person_controller.GetPeople(app)
+		people, err := person_controller.GetPeople(app.C.PersonRepo)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, dtos.R{
 				"status":  dtos.Error,
@@ -115,7 +115,7 @@ func registerPeopleApi(people echo.Group, app application.AppContext) {
 	people.GET("/:id", func(c echo.Context) error {
 		id := c.Param("id")
 
-		person, err := person_controller.GetPerson(id, app)
+		person, err := person_controller.GetPerson(id, app.C.PersonRepo)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, dtos.R{
 				"status":  dtos.Error,
