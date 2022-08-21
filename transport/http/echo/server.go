@@ -82,7 +82,7 @@ func registerPeopleApi(people echo.Group, app application.AppContext) {
 			})
 		}
 
-		new_id, err := person_controller.CreatePerson(person, app)
+		new_id, err := person_controller.CreatePerson(person, app.C.PersonRepo)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, dtos.R{
 				"status":  dtos.Error,

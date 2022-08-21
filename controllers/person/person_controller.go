@@ -1,16 +1,13 @@
 package person
 
 import (
-	"github.com/Ethan3600/funwithgolang/application"
 	"github.com/Ethan3600/funwithgolang/dtos"
 	"github.com/Ethan3600/funwithgolang/entities"
 	"github.com/Ethan3600/funwithgolang/repositories"
 )
 
-func CreatePerson(p dtos.Person, app application.AppContext) (string, error) {
+func CreatePerson(p dtos.Person, repo repositories.PersonRepository) (string, error) {
 	personEntity := p.ToEntity()
-
-	var repo = app.C.PersonRepo
 
 	return repo.Save(personEntity)
 }
