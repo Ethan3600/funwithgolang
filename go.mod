@@ -5,11 +5,11 @@ go 1.18
 require (
 	github.com/google/uuid v1.3.0
 	github.com/labstack/echo/v4 v4.7.2
+	github.com/go-chi/chi/v5 v5.0.7
+	github.com/go-chi/render v1.0.1
 )
 
 require (
-	github.com/go-chi/chi/v5 v5.0.7 // indirect
-	github.com/go-chi/render v1.0.1 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/labstack/gommon v0.3.1 // indirect
 	github.com/mattn/go-colorable v0.1.11 // indirect
