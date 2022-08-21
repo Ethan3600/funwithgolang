@@ -1,58 +1,47 @@
 package application
 
 import (
-	"reflect"
-
 	"github.com/Ethan3600/funwithgolang/db"
 	"github.com/Ethan3600/funwithgolang/db/adapters"
 	"github.com/Ethan3600/funwithgolang/repositories"
 )
 
-type Thing interface{}
-
-type ThingFactory func() Thing
+type Container struct {
+	Adapter    db.Persistence
+	Database   db.Database
+	PersonRepo repositories.PersonRepository
+}
 
 type AppContext struct {
 	Version    string
 	DbStrategy db.DatabaseStrategy
-    Container  map[string]Thing
+	C          Container
 }
 
 func NewApplication() AppContext {
 	container := boostrap()
 
-    var db = container["database"].(db.Database)
+	var db = container.Database
 
-	return AppContext {
+	return AppContext{
 		"1.0.0",
 		db.GetStrategy(),
-        container,
+		container,
 	}
 }
 
-func (ac AppContext) Get(name string) Thing {
-    thing := ac.Container[name]  
+func boostrap() Container {
+	c := Container{}
 
-    if reflect.TypeOf(thing).Kind() == reflect.Func {
-        return thing.(ThingFactory)()
-    } else {
-        return thing
-    }
-}
+	inMemAdapter := adapters.NewInMemoryAdapater()
 
-func boostrap() map[string]Thing {
-    things := make(map[string]Thing)
-
-    inMemAdapter := adapters.NewInMemoryAdapater()
-    
 	database := db.NewDatabase(inMemAdapter)
 
 	personRepo := repositories.NewPersonRepository(database)
 
-    things["adapter"] = inMemAdapter
-    things["database"] = database
-    things["personRepository"] = personRepo
-    
-    return things
-}
+	c.Adapter = inMemAdapter
+	c.Database = database
+	c.PersonRepo = personRepo
 
+	return c
+}

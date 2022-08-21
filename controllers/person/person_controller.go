@@ -4,19 +4,18 @@ import (
 	"github.com/Ethan3600/funwithgolang/application"
 	"github.com/Ethan3600/funwithgolang/dtos"
 	"github.com/Ethan3600/funwithgolang/entities"
-	"github.com/Ethan3600/funwithgolang/repositories"
 )
 
 func CreatePerson(p dtos.Person, app application.AppContext) (string, error) {
 	personEntity := p.ToEntity()
 
-	var repo  = app.Get("personRepository").(repositories.PersonRepository)
+	var repo = app.C.PersonRepo
 
 	return repo.Save(personEntity)
 }
 
 func GetPeople(app application.AppContext) ([]dtos.Person, error) {
-	var repo  = app.Get("personRepository").(repositories.PersonRepository)
+	var repo = app.C.PersonRepo
 
 	peopleEntities, err := repo.GetPeople()
 	if err != nil {
@@ -27,7 +26,7 @@ func GetPeople(app application.AppContext) ([]dtos.Person, error) {
 }
 
 func GetPerson(id string, app application.AppContext) (*dtos.Person, error) {
-	var repo  = app.Get("personRepository").(repositories.PersonRepository)
+	var repo = app.C.PersonRepo
 
 	var person *dtos.Person
 
